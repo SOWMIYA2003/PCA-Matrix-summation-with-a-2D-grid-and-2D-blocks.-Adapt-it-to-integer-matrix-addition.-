@@ -11,14 +11,12 @@ Store the resultant matrix in C.
 ### Step 3 : 
 Declare a function with __ global __ , which is a CUDA C keyword , to execute the function to perform matrix summation on GPU .
 ### Step 4 :
-Declare Main method/function . 
+Declare Main method/function . In the Main function Set up device and data size of matrix ,Allocate Host Memory and device global memory,Initialize data at host side and then add matrix at host side ,transfer data from host to device.
 ### Step 5 : 
-In the Main function Set up device and data size of matrix ,Allocate Host Memory and device global memory,Initialize data at host side and then add matrix at host side ,transfer data from host to device.
-### Step 6 : 
 Invoke kernel at host side , check for kernel error and copy kernel result back to host side.
-### Step 7 :
+### Step 6 :
 Finally Free device global memory,host memory and reset device.
-### Step 8 :
+### Step 7 :
 Save and Run the Program.
 ## Program: 
 ```
@@ -196,12 +194,22 @@ int main(int argc, char **argv)
 }
 ```
 ## Output:
-![op](./pca21.png)
 ```
-Matrix initialization : 6.338138 sec.
-Sum matrix on Host : 0.884061 sec.
-Sum matrix on GPU2D : 0.012146 sec.
+root@MidPC:/home/student/Desktop# nvcc first.cu
+root@MidPC:/home/student/Desktop# ./a.out
+./a.out Starting...
+Using Device 0: NVIDIA GeForce GTX 1660 SUPER
+Matrix size: nx 16384 ny 16384
+Matrix initialization elapsed 6.199756 sec
+sumMatrixOnHost elapsed 0.880898 sec
+sumMatrixOnGPU2D <<<(512,512), (32,32)>>> elapsed 0.012740 sec
+Arrays match.
 ```
-
+![WhatsApp Image 2023-05-26 at 8 21 30 AM](https://github.com/SOWMIYA2003/PCA-Matrix-summation-with-a-2D-grid-and-2D-blocks.-Adapt-it-to-integer-matrix-addition.-/assets/93427443/c6c6acda-768f-4fce-98d8-a5c4042fe023)
+```
+Matrix initialization : 6.199756 sec.
+Sum matrix on Host : 0.880898 sec.
+Sum matrix on GPU2D : 0.012740 sec.
+```
 ## Result:
 Integer Matrix summation with a 2D-grid and 2D-blocks is performed and the best execution configuration is found successfully.
